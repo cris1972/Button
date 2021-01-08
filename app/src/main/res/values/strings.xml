@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">ButtonD</string>
-    <string name="btnMain">D</string>
-    <string name="btnSetting">Button</string>
+    <string name="app_name">Кнопка</string>
+    <string name="btnMain">Действие</string>
+    <string name="btnSetting">Настройки</string>
+    <string name="ButtonNameRemember">запомнить</string>
+    <string name="nameFolderForDelite">название папок для уничтожения</string>
 </resources>

@@ -2,10 +2,12 @@ package mag.langrage.buttond;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.io.File;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
       File myDir ;
       String pathFileDelete;
       ArrayList<String> MyListDir  = new ArrayList();
+    View mainLinerliyout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         btnMain= findViewById(R.id.btnMain);
         btnSetting= findViewById(R.id.btnSetting);
         textView= findViewById(R.id.textView);
+        mainLinerliyout = findViewById(R.id.mainLayot);
         pathFileDelete=Environment.getExternalStorageDirectory().getAbsolutePath()+"/";
         MyListDir.add("Telegram");
         MyListDir.add("virtual");
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                  }
                  textView.setText("готово");
 
+
              } catch (Exception e){
                  textView.setText("U have a problams   "+e.getMessage());
 
@@ -57,8 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
+
                     new File(pathFileDelete).createNewFile();
                     textView.setText("готово");
+
+
                 } catch (Exception e) {
                     textView.setText("U have a problams  deleteFile "+e.getMessage());
                      } }
