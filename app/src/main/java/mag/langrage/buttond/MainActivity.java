@@ -1,22 +1,15 @@
 package mag.langrage.buttond;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
       TextView textView;
       File myDir ;
       String pathFileDelete;
+      ArrayList<String> MyListDir  = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
         btnMain= findViewById(R.id.btnMain);
         btnSetting= findViewById(R.id.btnSetting);
         textView= findViewById(R.id.textView);
-        pathFileDelete=Environment.getExternalStorageDirectory().getAbsolutePath();
-        pathFileDelete=pathFileDelete+"/Telegram";
+        pathFileDelete=Environment.getExternalStorageDirectory().getAbsolutePath()+"/";
+        MyListDir.add("Telegram");
+        MyListDir.add("virtual");
         textView.setText(pathFileDelete);
 
         btnMain.setOnClickListener(new View.OnClickListener() {
@@ -41,10 +36,14 @@ public class MainActivity extends AppCompatActivity {
 
              try {
 
-                 myDir = new File(pathFileDelete);
-                 deleteFolderRecursive(myDir);
-                 textView.setText("готово");
 
+                 for (String Dir : MyListDir) {
+
+
+                     deleteFolderRecursive(new File(pathFileDelete+Dir));
+
+                 }
+                 textView.setText("готово");
 
              } catch (Exception e){
                  textView.setText("U have a problams   "+e.getMessage());
