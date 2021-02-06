@@ -2,71 +2,50 @@ package mag.langrage.buttond;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.io.File;
 import java.util.ArrayList;
-
-
 public class MainActivity extends AppCompatActivity {
-
     Button btnMain, btnSetting;
       TextView textView;
       File myDir ;
       String pathFileDelete;
-      ArrayList<String> MyListDir  = new ArrayList();
-    View mainLinerliyout;
-    @Override
+     public static ArrayList<String> MyListDir  = new ArrayList();
+
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnMain= findViewById(R.id.btnMain);
         btnSetting= findViewById(R.id.btnSetting);
         textView= findViewById(R.id.textView);
-        mainLinerliyout = findViewById(R.id.mainLayot);
         pathFileDelete=Environment.getExternalStorageDirectory().getAbsolutePath()+"/";
         MyListDir.add("Telegram");
         MyListDir.add("virtual");
+        MyListDir.add("1");
+        setMyListDir( MyListDir);
         textView.setText(pathFileDelete);
 
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-             try {
-
-
-                 for (String Dir : MyListDir) {
-
-
+                try {
+                    for (String Dir : MyListDir) {
                      deleteFolderRecursive(new File(pathFileDelete+Dir));
-
                  }
                  textView.setText("готово");
-
-
-             } catch (Exception e){
+                } catch (Exception e){
                  textView.setText("U have a problams   "+e.getMessage());
-
-             }
-
-
+                }
             }
-
             private void deleteFile() {
-
                 try {
-
-
                     new File(pathFileDelete).createNewFile();
                     textView.setText("готово");
-
-
                 } catch (Exception e) {
                     textView.setText("U have a problams  deleteFile "+e.getMessage());
                      } }
@@ -75,19 +54,12 @@ public class MainActivity extends AppCompatActivity {
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Context content = MainActivity.this;
                 Intent IntentSet= new Intent(content, Setting.class);
                 startActivity(IntentSet);
-
             }
         });
-
-        
-
-
     }
-
     private void deleteFolderRecursive(File dir) {
 
         File[] files = dir.listFiles();
@@ -102,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         dir.delete();
+    }
+    public void setMyListDir(ArrayList<String> MyListDir) {
+        this.MyListDir = MyListDir;
     }
 }
 
